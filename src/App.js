@@ -30,6 +30,17 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000')
 })
 
+
+///////question 2-----------------------------------------------------------
+
+SELECT c.customerId, c.name, GROUP_CONCAT(s.subjectName ORDER BY s.subjectName ASC SEPARATOR ',') AS subjects
+FROM customers c
+JOIN mapping m ON c.customerId = m.customerId
+JOIN subjects s ON m.subjectId = s.subjectId
+GROUP BY c.customerId, c.name
+ORDER BY c.name ASC;
+
+
 //question 3-------------------------------------------------------------------------------------------------------------
 const mysql = require('mysql')
 const customers = [
@@ -88,6 +99,8 @@ function insertCustomers(customers) {
 
   return Promise.all(queries)
 }
+
+
 ////question 4-------------------------------------------
 const person = {
   id: 2,
